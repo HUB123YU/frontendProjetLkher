@@ -1,0 +1,331 @@
+<div class="grid"  *ngIf="listActionIsValid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Stage')" *ngIf="createActionIsValid"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()  *ngIf="deleteActionIsValid"></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-secondary mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-secondary" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="col-12">
+                    <div class="flex flex-wrap p-fluid col-12">
+                       <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="1">{{'stage.sujet' | translate}}</label>
+                            <input  class="w-full"  pInputText id="1" type="text"  [(ngModel)]="criteria.sujetLike">
+                        </div>
+                       <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="2">{{'stage.description' | translate}}</label>
+                            <input  class="w-full"  pInputText id="2" type="text"  [(ngModel)]="criteria.descriptionLike">
+                        </div>
+
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label class="font-bold block mb-2" for="3-1">{{'stage.dateDebutMin' | translate}}</label>
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateDebutFrom"
+                                    id="3-1" dateFormat="dd-MM-yy"  [showIcon]="true"  class="p-fluid"></p-calendar>
+                        </div>
+
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="3-2">{{'stage.dateDebutMax' | translate}}</label>
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateDebutTo"
+                                    id="3-2" dateFormat="dd-MM-yy"  [showIcon]="true" class="p-fluid"></p-calendar>
+                        </div>
+
+
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label class="font-bold block mb-2" for="4-1">{{'stage.dateFinMin' | translate}}</label>
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateFinFrom"
+                                    id="4-1" dateFormat="dd-MM-yy"  [showIcon]="true"  class="p-fluid"></p-calendar>
+                        </div>
+
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="4-2">{{'stage.dateFinMax' | translate}}</label>
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateFinTo"
+                                    id="4-2" dateFormat="dd-MM-yy"  [showIcon]="true" class="p-fluid"></p-calendar>
+                        </div>
+
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="5-2">{{'stage.domaine' | translate}}</label>
+                            <p-dropdown [options]="domaines" [(ngModel)]="criteria.domaine" id="5" [filter]="true" class="p-fluid"
+                                        [showClear]="true"  placeholder="{{'stage.domaine' | translate}}" optionLabel="code">
+                            </p-dropdown>
+                        </div>
+                       <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="6">{{'stage.lieu' | translate}}</label>
+                            <input  class="w-full"  pInputText id="6" type="text"  [(ngModel)]="criteria.lieuLike">
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="7-1">{{'stage.dureeSemainesMin' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.dureeSemainesMin" id="7-1"></p-inputNumber>
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="7-2">{{'stage.dureeSemainesMax' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.dureeSemainesMax" id="7-2"></p-inputNumber>
+                       </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="8-2">{{'stage.societe' | translate}}</label>
+                            <p-dropdown [options]="societes" [(ngModel)]="criteria.societe" id="8" [filter]="true" class="p-fluid"
+                                        [showClear]="true"  placeholder="{{'stage.societe' | translate}}" optionLabel="ice">
+                            </p-dropdown>
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="12-2">{{'stage.jury' | translate}}</label>
+                            <p-dropdown [options]="jurys" [(ngModel)]="criteria.jury" id="12" [filter]="true" class="p-fluid"
+                                        [showClear]="true"  placeholder="{{'stage.jury' | translate}}" optionLabel="ref">
+                            </p-dropdown>
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="13-2">{{'stage.filiere' | translate}}</label>
+                            <p-dropdown [options]="filieres" [(ngModel)]="criteria.filiere" id="13" [filter]="true" class="p-fluid"
+                                        [showClear]="true"  placeholder="{{'stage.filiere' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="14-1">{{'stage.noteMin' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.noteMin" id="14-1"></p-inputNumber>
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="14-2">{{'stage.noteMax' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.noteMax" id="14-2"></p-inputNumber>
+                       </div>
+
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label class="font-bold block mb-2" for="15-1">{{'stage.dateSoutenanceMin' | translate}}</label>
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateSoutenanceFrom"
+                                    id="15-1" dateFormat="dd-MM-yy"  [showIcon]="true"  class="p-fluid"></p-calendar>
+                        </div>
+
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="15-2">{{'stage.dateSoutenanceMax' | translate}}</label>
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateSoutenanceTo"
+                                    id="15-2" dateFormat="dd-MM-yy"  [showIcon]="true" class="p-fluid"></p-calendar>
+                        </div>
+
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="16-2">{{'stage.typeStage' | translate}}</label>
+                            <p-dropdown [options]="typeStages" [(ngModel)]="criteria.typeStage" id="16" [filter]="true" class="p-fluid"
+                                        [showClear]="true"  placeholder="{{'stage.typeStage' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div [style]="{ marginTop : '1rem', display: 'flex', justifyContent: 'flex-end' }">
+                        <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                    </div>
+                </div>
+
+
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['sujet', 'description', 'dateDebut', 'dateFin', 'domainecode', 'lieu', 'dureeSemaines', 'societeice', 'juryref', 'filierelibelle', 'note', 'dateSoutenance', 'typeStagelibelle']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'stage.header' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                        <th pSortableColumn="sujet">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.sujet' | translate}}</span>
+                                <p-sortIcon field="sujet"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.sujet" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="description">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.description' | translate}}</span>
+                                <p-sortIcon field="description"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.description" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="dateDebut">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.dateDebut' | translate}}</span>
+                                <p-sortIcon field="dateDebut"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="dateFin">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.dateFin' | translate}}</span>
+                                <p-sortIcon field="dateFin"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="domaine">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.domaine' | translate}}</span>
+                                <p-sortIcon field="domaine"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="lieu">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.lieu' | translate}}</span>
+                                <p-sortIcon field="lieu"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.lieu" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="dureeSemaines">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.dureeSemaines' | translate}}</span>
+                                <p-sortIcon field="dureeSemaines"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="societe">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.societe' | translate}}</span>
+                                <p-sortIcon field="societe"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="jury">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.jury' | translate}}</span>
+                                <p-sortIcon field="jury"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                <!-- 
+                        <th pSortableColumn="filiere">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.filiere' | translate}}</span>
+                                <p-sortIcon field="filiere"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="note">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.note' | translate}}</span>
+                                <p-sortIcon field="note"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="dateSoutenance">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.dateSoutenance' | translate}}</span>
+                                <p-sortIcon field="dateSoutenance"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="typeStage">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'stage.typeStage' | translate}}</span>
+                                <p-sortIcon field="typeStage"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                        <td>{{element.sujet}}</td>
+                            
+                            
+                        <td>{{element.description}}</td>
+                            
+                            
+                        <td>{{element.dateDebut | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td>{{element.dateFin | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td>{{element.domaine?.code}}</td>
+                            
+                            
+                        <td>{{element.lieu}}</td>
+                            
+                            
+                        <td>{{element.dureeSemaines}}</td>
+                            
+                            
+                        <td>{{element.societe?.ice}}</td>
+                            
+                            
+                        <td>{{element.jury?.ref}}</td>
+                            
+                             <!-- 
+                        <td>{{element.filiere?.libelle}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.note}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.dateSoutenance | date :'dd/MM/yyyy HH:mm' }}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.typeStage?.libelle}}</td>
+                             --> 
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"  *ngIf="deleteActionIsValid"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"  *ngIf="duplicateActionIsValid"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'stage' : 'stages' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-stage-create-etudiant  *ngIf="createDialog  && createActionIsValid"></app-stage-create-etudiant>
+        <app-stage-edit-etudiant  *ngIf="editDialog  && editActionIsValid"></app-stage-edit-etudiant>
+        <app-stage-view-etudiant  *ngIf="viewDialog  && viewActionIsValid"></app-stage-view-etudiant>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>
+
+<p-card header="Permission not allowed" *ngIf="!listActionIsValid">
+    <p class="m-0">
+        You don't have permission to access !
+    </p>
+</p-card>

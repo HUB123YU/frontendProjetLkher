@@ -1,0 +1,98 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'stage.tabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'stage.tabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'stage.sujet' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'stage.sujet' | translate}}" autofocus  id="1" [ngModel]="item.sujet">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'stage.description' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'stage.description' | translate}}" autofocus  id="2" [ngModel]="item.description">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'stage.dateDebut' | translate}}</label>
+                        <p-calendar id="3" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'stage.dateDebut' | translate}}"  [ngModel]="item.dateDebut" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'stage.dateFin' | translate}}</label>
+                        <p-calendar id="4" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'stage.dateFin' | translate}}"  [ngModel]="item.dateFin" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'stage.domaine' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'stage.domaine' | translate}}" autofocus  id="5" [ngModel]="item.domaine?.code">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'stage.lieu' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'stage.lieu' | translate}}" autofocus  id="6" [ngModel]="item.lieu">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'stage.dureeSemaines' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="7" [disabled]="true" placeholder="{{'stage.dureeSemaines' | translate}}" [ngModel]="item.dureeSemaines"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="8">{{'stage.societe' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'stage.societe' | translate}}" autofocus  id="8" [ngModel]="item.societe?.ice">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="12">{{'stage.jury' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'stage.jury' | translate}}" autofocus  id="12" [ngModel]="item.jury?.ref">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="13">{{'stage.filiere' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'stage.filiere' | translate}}" autofocus  id="13" [ngModel]="item.filiere?.libelle">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="14">{{'stage.note' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="14" [disabled]="true" placeholder="{{'stage.note' | translate}}" [ngModel]="item.note"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="15">{{'stage.dateSoutenance' | translate}}</label>
+                        <p-calendar id="15" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'stage.dateSoutenance' | translate}}"  [ngModel]="item.dateSoutenance" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="16">{{'stage.typeStage' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'stage.typeStage' | translate}}" autofocus  id="16" [ngModel]="item.typeStage?.libelle">
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="{{'stage.stageAttachements' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.stageAttachements" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Attachement</th>
+                                        <th>Size</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.attachement?.id}}</td>
+                                        <td>{{p.size}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-flexbox">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

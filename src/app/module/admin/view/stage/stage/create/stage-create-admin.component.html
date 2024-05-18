@@ -1,0 +1,195 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'stage.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'stage.tabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="1">{{'stage.sujet' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'stage.sujet' | translate}}" id="1" [(ngModel)]="item.sujet"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="2">{{'stage.description' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'stage.description' | translate}}" id="2" [(ngModel)]="item.description"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="3">{{'stage.dateDebut' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="3"  [showTime]="true" [showSeconds]="false" placeholder="{{'stage.dateDebut' | translate}}"  [(ngModel)]="item.dateDebut"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="4">{{'stage.dateFin' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="4"  [showTime]="true" [showSeconds]="false" placeholder="{{'stage.dateFin' | translate}}"  [(ngModel)]="item.dateFin"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="5">{{'stage.domaine' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="domaines" [(ngModel)]="item.domaine" id="5" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'stage.domaine' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="6">{{'stage.lieu' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'stage.lieu' | translate}}" id="6" [(ngModel)]="item.lieu"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="7">{{'stage.dureeSemaines' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="7" placeholder="{{'stage.dureeSemaines' | translate}}" [(ngModel)]="item.dureeSemaines"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="8">{{'stage.societe' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="societes" [(ngModel)]="item.societe" id="8" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="ice" placeholder="{{'stage.societe' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                            <div class="field col-12  md:col-6">
+                                                <label>Etudiant</label>
+                                                <p-multiSelect [options]="stageEtudiants" [(ngModel)]="item.stageEtudiants" itemSize="30" [virtualScroll]="true"
+                                                                                                                          defaultLabel="Select un etudiant" optionLabel="etudiant.id"  display="chip"></p-multiSelect>
+                                            </div>
+                                            <div class="field col-12  md:col-6">
+                                                <label>Encadrant interne</label>
+                                                <p-multiSelect [options]="stageEncadrantInternes" [(ngModel)]="item.stageEncadrantInternes" itemSize="30" [virtualScroll]="true"
+                                                                                                                          defaultLabel="Select un encadrantInterne" optionLabel="encadrantInterne.code"  display="chip"></p-multiSelect>
+                                            </div>
+                                            <div class="field col-12  md:col-6">
+                                                <label>Encadrant externe</label>
+                                                <p-multiSelect [options]="stageEncadrantExternes" [(ngModel)]="item.stageEncadrantExternes" itemSize="30" [virtualScroll]="true"
+                                                                                                                          defaultLabel="Select un encadrantExterne" optionLabel="encadrantExterne.code"  display="chip"></p-multiSelect>
+                                            </div>
+                                            <div class="field col-11 md:col-6">
+                                                <label for="12">{{'stage.jury' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="jurys" [(ngModel)]="item.jury" id="12" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="ref" placeholder="{{'stage.jury' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="13">{{'stage.filiere' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="filieres" [(ngModel)]="item.filiere" id="13" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'stage.filiere' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="14">{{'stage.note' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="14" placeholder="{{'stage.note' | translate}}" [(ngModel)]="item.note"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="15">{{'stage.dateSoutenance' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="15"  [showTime]="true" [showSeconds]="false" placeholder="{{'stage.dateSoutenance' | translate}}"  [(ngModel)]="item.dateSoutenance"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="16">{{'stage.typeStage' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="typeStages" [(ngModel)]="item.typeStage" id="16" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'stage.typeStage' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                </div>
+                            </p-tabPanel>
+                                    <p-tabPanel header="{{'stage.stageAttachements' | translate}}">
+                                                <div class="p-col">
+                                                    <div class="grid">
+                                                                    <div class="field col-11 md:col-6">
+                                                                        <label>Attachement</label>
+                                                                        <p-dropdown  appendTo="body"  [options]="attachements" [(ngModel)]="stageAttachementsElement.attachement"
+                                                                                     id="2"  [filter]="true" filterMatchMode="contains" [showClear]="true" optionLabel="id"
+                                                                                     placeholder="Attachement"  >
+                                                                        </p-dropdown>
+                                                                        
+                                                                    </div>
+
+                                                                    <div class="field col-12 md:col-6">
+                                                                        <label for="3">Size</label>
+                                                                        <p-inputNumber class="mb-2 mr-2" id="size" placeholder="Size"  [(ngModel)]="stageAttachementsElement.size"></p-inputNumber>
+                                                                        
+                                                                    </div>
+                                                        <div class="field col-12 md:col-1">
+                                                            <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addStageAttachements()"></button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="p-col">
+                                                    <div class="card">
+                                                        <p-table [value]="item.stageAttachements" [scrollable]="true" scrollHeight="200px">
+                                                            <ng-template pTemplate="header">
+                                                                <tr>
+                                                                                <th>Attachement</th>
+                                                                                <th>Size</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </ng-template>
+                                                            <ng-template pTemplate="body" let-p>
+                                                                <tr>
+                                                                            <td>{{p.attachement?.id}}</td>
+                                                                                <td>{{p.size}}</td>
+                                                                    <td>
+                                                                        <button (click)="deleteStageAttachements(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                        <button (click)="editStageAttachements(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                                    </td>
+                                                                </tr>
+                                                            </ng-template>
+                                                        </p-table>
+                                                    </div>
+
+                                                </div>
+                                    </p-tabPanel>
+
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-flexbox">
+
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()"></button>
+
+
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+
+
+                </div>
+            </ng-template>
+
+    </p-dialog>

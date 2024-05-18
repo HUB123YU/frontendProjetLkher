@@ -1,0 +1,584 @@
+import {Component, OnInit, Input} from '@angular/core';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {FileTempDto} from 'src/app/zynerator/dto/FileTempDto.model';
+
+import {DatePipe} from '@angular/common';
+import {Router} from '@angular/router';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
+
+
+import {environment} from 'src/environments/environment';
+
+import {RoleService} from 'src/app/zynerator/security/shared/service/Role.service';
+import {AbstractService} from 'src/app/zynerator/service/AbstractService';
+import {BaseDto} from 'src/app/zynerator/dto/BaseDto.model';
+import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
+import {StringUtilService} from 'src/app/zynerator/util/StringUtil.service';
+import {ServiceLocator} from 'src/app/zynerator/service/ServiceLocator';
+
+
+
+import {StageAdminService} from 'src/app/shared/service/admin/stage/StageAdmin.service';
+import {StageDto} from 'src/app/shared/model/stage/Stage.model';
+import {StageCriteria} from 'src/app/shared/criteria/stage/StageCriteria.model';
+import {SocieteDto} from 'src/app/shared/model/societe/Societe.model';
+import {SocieteAdminService} from 'src/app/shared/service/admin/societe/SocieteAdmin.service';
+import {StageAttachementDto} from 'src/app/shared/model/stage/StageAttachement.model';
+import {StageAttachementAdminService} from 'src/app/shared/service/admin/stage/StageAttachementAdmin.service';
+import {EtudiantDto} from 'src/app/shared/model/etudiant/Etudiant.model';
+import {EtudiantAdminService} from 'src/app/shared/service/admin/etudiant/EtudiantAdmin.service';
+import {StageEncadrantExterneDto} from 'src/app/shared/model/stage/StageEncadrantExterne.model';
+import {StageEncadrantExterneAdminService} from 'src/app/shared/service/admin/stage/StageEncadrantExterneAdmin.service';
+import {AttachementDto} from 'src/app/shared/model/piecejointe/Attachement.model';
+import {AttachementAdminService} from 'src/app/shared/service/admin/piecejointe/AttachementAdmin.service';
+import {EncadrantInterneDto} from 'src/app/shared/model/encadrant/EncadrantInterne.model';
+import {EncadrantInterneAdminService} from 'src/app/shared/service/admin/encadrant/EncadrantInterneAdmin.service';
+import {StageEtudiantDto} from 'src/app/shared/model/stage/StageEtudiant.model';
+import {StageEtudiantAdminService} from 'src/app/shared/service/admin/stage/StageEtudiantAdmin.service';
+import {JuryDto} from 'src/app/shared/model/jury/Jury.model';
+import {JuryAdminService} from 'src/app/shared/service/admin/jury/JuryAdmin.service';
+import {FiliereDto} from 'src/app/shared/model/departement/Filiere.model';
+import {FiliereAdminService} from 'src/app/shared/service/admin/departement/FiliereAdmin.service';
+import {EncadrantExterneDto} from 'src/app/shared/model/encadrant/EncadrantExterne.model';
+import {EncadrantExterneAdminService} from 'src/app/shared/service/admin/encadrant/EncadrantExterneAdmin.service';
+import {StageEncadrantInterneDto} from 'src/app/shared/model/stage/StageEncadrantInterne.model';
+import {StageEncadrantInterneAdminService} from 'src/app/shared/service/admin/stage/StageEncadrantInterneAdmin.service';
+import {TypeStageDto} from 'src/app/shared/model/stage/TypeStage.model';
+import {TypeStageAdminService} from 'src/app/shared/service/admin/stage/TypeStageAdmin.service';
+import {DomaineDto} from 'src/app/shared/model/departement/Domaine.model';
+import {DomaineAdminService} from 'src/app/shared/service/admin/departement/DomaineAdmin.service';
+@Component({
+  selector: 'app-stage-create-admin',
+  templateUrl: './stage-create-admin.component.html'
+})
+export class StageCreateAdminComponent  implements OnInit {
+
+	protected _submitted = false;
+    protected _errorMessages = new Array<string>();
+
+    protected datePipe: DatePipe;
+    protected messageService: MessageService;
+    protected confirmationService: ConfirmationService;
+    protected roleService: RoleService;
+    protected router: Router;
+    protected stringUtilService: StringUtilService;
+    private _activeTab = 0;
+    private _file: any;
+    private _files: any;
+
+    private _stageEtudiantsElement = new StageEtudiantDto();
+    private _stageEncadrantInternesElement = new StageEncadrantInterneDto();
+    private _stageEncadrantExternesElement = new StageEncadrantExterneDto();
+    private _stageAttachementsElement = new StageAttachementDto();
+
+
+    private _validDomaineLibelle = true;
+    private _validDomaineCode = true;
+    private _validSocieteIce = true;
+    private _validJuryRef = true;
+    private _validFiliereCode = true;
+    private _validFiliereLibelle = true;
+    private _validTypeStageReference = true;
+    private _validTypeStageLibelle = true;
+    private _stageEtudiants: Array<StageEtudiantDto> = [];
+    private _stageEncadrantInternes: Array<StageEncadrantInterneDto> = [];
+    private _stageEncadrantExternes: Array<StageEncadrantExterneDto> = [];
+
+	constructor(private service: StageAdminService , private societeService: SocieteAdminService, private stageAttachementService: StageAttachementAdminService, private etudiantService: EtudiantAdminService, private stageEncadrantExterneService: StageEncadrantExterneAdminService, private attachementService: AttachementAdminService, private encadrantInterneService: EncadrantInterneAdminService, private stageEtudiantService: StageEtudiantAdminService, private juryService: JuryAdminService, private filiereService: FiliereAdminService, private encadrantExterneService: EncadrantExterneAdminService, private stageEncadrantInterneService: StageEncadrantInterneAdminService, private typeStageService: TypeStageAdminService, private domaineService: DomaineAdminService, @Inject(PLATFORM_ID) private platformId? ) {
+        this.datePipe = ServiceLocator.injector.get(DatePipe);
+        this.messageService = ServiceLocator.injector.get(MessageService);
+        this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
+        this.roleService = ServiceLocator.injector.get(RoleService);
+        this.router = ServiceLocator.injector.get(Router);
+        this.stringUtilService = ServiceLocator.injector.get(StringUtilService);
+    }
+
+    ngOnInit(): void {
+        this.etudiantService.findAll().subscribe(data => this.prepareStageEtudiants(data));
+        this.stageEtudiantsElement.etudiant = new EtudiantDto();
+        this.etudiantService.findAll().subscribe((data) => this.etudiants = data);
+        this.encadrantInterneService.findAll().subscribe(data => this.prepareStageEncadrantInternes(data));
+        this.stageEncadrantInternesElement.encadrantInterne = new EncadrantInterneDto();
+        this.encadrantInterneService.findAll().subscribe((data) => this.encadrantInternes = data);
+        this.encadrantExterneService.findAll().subscribe(data => this.prepareStageEncadrantExternes(data));
+        this.stageEncadrantExternesElement.encadrantExterne = new EncadrantExterneDto();
+        this.encadrantExterneService.findAll().subscribe((data) => this.encadrantExternes = data);
+        this.stageAttachementsElement.attachement = new AttachementDto();
+        this.attachementService.findAll().subscribe((data) => this.attachements = data);
+        this.domaineService.findAll().subscribe((data) => this.domaines = data);
+        this.societeService.findAll().subscribe((data) => this.societes = data);
+        this.juryService.findAll().subscribe((data) => this.jurys = data);
+        this.filiereService.findAll().subscribe((data) => this.filieres = data);
+        this.typeStageService.findAll().subscribe((data) => this.typeStages = data);
+    }
+
+
+    public save(): void {
+        this.submitted = true;
+        this.validateForm();
+        if (this.errorMessages.length === 0) {
+            this.saveWithShowOption(false);
+        } else {
+            this.messageService.add({severity: 'error',summary: 'Erreurs',detail: 'Merci de corrigé les erreurs sur le formulaire'});
+        }
+    }
+
+    public saveWithShowOption(showList: boolean) {
+        this.service.save().subscribe(item => {
+            if (item != null) {
+                this.items.push({...item});
+                this.createDialog = false;
+                this.submitted = false;
+                this.item = new StageDto();
+            } else {
+                this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
+            }
+
+        }, error => {
+            console.log(error);
+        });
+    }
+
+
+    public hideCreateDialog() {
+        this.createDialog = false;
+        this.setValidation(true);
+    }
+
+
+     prepareStageEtudiants(etudiants: Array<EtudiantDto>): void{
+        if( etudiants != null){
+                etudiants.forEach(e => {
+                const stageEtudiant = new StageEtudiantDto();
+                stageEtudiant.etudiant = e;
+                this.stageEtudiants.push(stageEtudiant);
+            });
+        }
+    }
+     prepareStageEncadrantInternes(encadrantInternes: Array<EncadrantInterneDto>): void{
+        if( encadrantInternes != null){
+                encadrantInternes.forEach(e => {
+                const stageEncadrantInterne = new StageEncadrantInterneDto();
+                stageEncadrantInterne.encadrantInterne = e;
+                this.stageEncadrantInternes.push(stageEncadrantInterne);
+            });
+        }
+    }
+     prepareStageEncadrantExternes(encadrantExternes: Array<EncadrantExterneDto>): void{
+        if( encadrantExternes != null){
+                encadrantExternes.forEach(e => {
+                const stageEncadrantExterne = new StageEncadrantExterneDto();
+                stageEncadrantExterne.encadrantExterne = e;
+                this.stageEncadrantExternes.push(stageEncadrantExterne);
+            });
+        }
+    }
+
+    validateStageAttachements(){
+        this.errorMessages = new Array();
+    }
+
+
+    public  setValidation(value: boolean){
+    }
+
+    public addStageAttachements() {
+        if( this.item.stageAttachements == null )
+            this.item.stageAttachements = new Array<StageAttachementDto>();
+       this.validateStageAttachements();
+       if (this.errorMessages.length === 0) {
+              this.item.stageAttachements.push({... this.stageAttachementsElement});
+              this.stageAttachementsElement = new StageAttachementDto();
+       }else{
+            this.messageService.add({severity: 'error',summary: 'Erreurs',detail: 'Merci de corrigé les erreurs suivant : ' + this.errorMessages});
+       }
+    }
+
+
+    public deletestageAttachements(p: StageAttachementDto) {
+        this.item.stageAttachements.forEach((element, index) => {
+            if (element === p) { this.item.stageAttachements.splice(index, 1); }
+        });
+    }
+
+    public editstageAttachements(p: StageAttachementDto) {
+        this.stageAttachementsElement = {... p};
+        this.activeTab = 0;
+    }
+
+
+    public  validateForm(): void{
+        this.errorMessages = new Array<string>();
+    }
+
+
+
+    public async openCreateTypeStage(typeStage: string) {
+    const isPermistted = await this.roleService.isPermitted('TypeStage', 'add');
+    if(isPermistted) {
+         this.typeStage = new TypeStageDto();
+         this.createTypeStageDialog = true;
+    }else{
+        this.messageService.add({
+        severity: 'error', summary: 'erreur', detail: 'problème de permission'
+        });
+     }
+    }
+
+    get jury(): JuryDto {
+        return this.juryService.item;
+    }
+    set jury(value: JuryDto) {
+        this.juryService.item = value;
+    }
+    get jurys(): Array<JuryDto> {
+        return this.juryService.items;
+    }
+    set jurys(value: Array<JuryDto>) {
+        this.juryService.items = value;
+    }
+    get createJuryDialog(): boolean {
+        return this.juryService.createDialog;
+    }
+    set createJuryDialog(value: boolean) {
+        this.juryService.createDialog= value;
+    }
+    get domaine(): DomaineDto {
+        return this.domaineService.item;
+    }
+    set domaine(value: DomaineDto) {
+        this.domaineService.item = value;
+    }
+    get domaines(): Array<DomaineDto> {
+        return this.domaineService.items;
+    }
+    set domaines(value: Array<DomaineDto>) {
+        this.domaineService.items = value;
+    }
+    get createDomaineDialog(): boolean {
+        return this.domaineService.createDialog;
+    }
+    set createDomaineDialog(value: boolean) {
+        this.domaineService.createDialog= value;
+    }
+    get encadrantInterne(): EncadrantInterneDto {
+        return this.encadrantInterneService.item;
+    }
+    set encadrantInterne(value: EncadrantInterneDto) {
+        this.encadrantInterneService.item = value;
+    }
+    get encadrantInternes(): Array<EncadrantInterneDto> {
+        return this.encadrantInterneService.items;
+    }
+    set encadrantInternes(value: Array<EncadrantInterneDto>) {
+        this.encadrantInterneService.items = value;
+    }
+    get createEncadrantInterneDialog(): boolean {
+        return this.encadrantInterneService.createDialog;
+    }
+    set createEncadrantInterneDialog(value: boolean) {
+        this.encadrantInterneService.createDialog= value;
+    }
+    get encadrantExterne(): EncadrantExterneDto {
+        return this.encadrantExterneService.item;
+    }
+    set encadrantExterne(value: EncadrantExterneDto) {
+        this.encadrantExterneService.item = value;
+    }
+    get encadrantExternes(): Array<EncadrantExterneDto> {
+        return this.encadrantExterneService.items;
+    }
+    set encadrantExternes(value: Array<EncadrantExterneDto>) {
+        this.encadrantExterneService.items = value;
+    }
+    get createEncadrantExterneDialog(): boolean {
+        return this.encadrantExterneService.createDialog;
+    }
+    set createEncadrantExterneDialog(value: boolean) {
+        this.encadrantExterneService.createDialog= value;
+    }
+    get societe(): SocieteDto {
+        return this.societeService.item;
+    }
+    set societe(value: SocieteDto) {
+        this.societeService.item = value;
+    }
+    get societes(): Array<SocieteDto> {
+        return this.societeService.items;
+    }
+    set societes(value: Array<SocieteDto>) {
+        this.societeService.items = value;
+    }
+    get createSocieteDialog(): boolean {
+        return this.societeService.createDialog;
+    }
+    set createSocieteDialog(value: boolean) {
+        this.societeService.createDialog= value;
+    }
+    get etudiant(): EtudiantDto {
+        return this.etudiantService.item;
+    }
+    set etudiant(value: EtudiantDto) {
+        this.etudiantService.item = value;
+    }
+    get etudiants(): Array<EtudiantDto> {
+        return this.etudiantService.items;
+    }
+    set etudiants(value: Array<EtudiantDto>) {
+        this.etudiantService.items = value;
+    }
+    get createEtudiantDialog(): boolean {
+        return this.etudiantService.createDialog;
+    }
+    set createEtudiantDialog(value: boolean) {
+        this.etudiantService.createDialog= value;
+    }
+    get typeStage(): TypeStageDto {
+        return this.typeStageService.item;
+    }
+    set typeStage(value: TypeStageDto) {
+        this.typeStageService.item = value;
+    }
+    get typeStages(): Array<TypeStageDto> {
+        return this.typeStageService.items;
+    }
+    set typeStages(value: Array<TypeStageDto>) {
+        this.typeStageService.items = value;
+    }
+    get createTypeStageDialog(): boolean {
+        return this.typeStageService.createDialog;
+    }
+    set createTypeStageDialog(value: boolean) {
+        this.typeStageService.createDialog= value;
+    }
+    get attachement(): AttachementDto {
+        return this.attachementService.item;
+    }
+    set attachement(value: AttachementDto) {
+        this.attachementService.item = value;
+    }
+    get attachements(): Array<AttachementDto> {
+        return this.attachementService.items;
+    }
+    set attachements(value: Array<AttachementDto>) {
+        this.attachementService.items = value;
+    }
+    get createAttachementDialog(): boolean {
+        return this.attachementService.createDialog;
+    }
+    set createAttachementDialog(value: boolean) {
+        this.attachementService.createDialog= value;
+    }
+    get filiere(): FiliereDto {
+        return this.filiereService.item;
+    }
+    set filiere(value: FiliereDto) {
+        this.filiereService.item = value;
+    }
+    get filieres(): Array<FiliereDto> {
+        return this.filiereService.items;
+    }
+    set filieres(value: Array<FiliereDto>) {
+        this.filiereService.items = value;
+    }
+    get createFiliereDialog(): boolean {
+        return this.filiereService.createDialog;
+    }
+    set createFiliereDialog(value: boolean) {
+        this.filiereService.createDialog= value;
+    }
+
+    get stageEtudiants(): Array<StageEtudiantDto> {
+        if( this._stageEtudiants == null )
+            this._stageEtudiants = new Array();
+        return this._stageEtudiants;
+    }
+
+    set stageEtudiants(value: Array<StageEtudiantDto>) {
+        this._stageEtudiants = value;
+    }
+    get stageEncadrantInternes(): Array<StageEncadrantInterneDto> {
+        if( this._stageEncadrantInternes == null )
+            this._stageEncadrantInternes = new Array();
+        return this._stageEncadrantInternes;
+    }
+
+    set stageEncadrantInternes(value: Array<StageEncadrantInterneDto>) {
+        this._stageEncadrantInternes = value;
+    }
+    get stageEncadrantExternes(): Array<StageEncadrantExterneDto> {
+        if( this._stageEncadrantExternes == null )
+            this._stageEncadrantExternes = new Array();
+        return this._stageEncadrantExternes;
+    }
+
+    set stageEncadrantExternes(value: Array<StageEncadrantExterneDto>) {
+        this._stageEncadrantExternes = value;
+    }
+
+
+
+    get validDomaineLibelle(): boolean {
+        return this._validDomaineLibelle;
+    }
+    set validDomaineLibelle(value: boolean) {
+        this._validDomaineLibelle = value;
+    }
+    get validDomaineCode(): boolean {
+        return this._validDomaineCode;
+    }
+    set validDomaineCode(value: boolean) {
+        this._validDomaineCode = value;
+    }
+    get validSocieteIce(): boolean {
+        return this._validSocieteIce;
+    }
+    set validSocieteIce(value: boolean) {
+        this._validSocieteIce = value;
+    }
+    get validJuryRef(): boolean {
+        return this._validJuryRef;
+    }
+    set validJuryRef(value: boolean) {
+        this._validJuryRef = value;
+    }
+    get validFiliereCode(): boolean {
+        return this._validFiliereCode;
+    }
+    set validFiliereCode(value: boolean) {
+        this._validFiliereCode = value;
+    }
+    get validFiliereLibelle(): boolean {
+        return this._validFiliereLibelle;
+    }
+    set validFiliereLibelle(value: boolean) {
+        this._validFiliereLibelle = value;
+    }
+    get validTypeStageReference(): boolean {
+        return this._validTypeStageReference;
+    }
+    set validTypeStageReference(value: boolean) {
+        this._validTypeStageReference = value;
+    }
+    get validTypeStageLibelle(): boolean {
+        return this._validTypeStageLibelle;
+    }
+    set validTypeStageLibelle(value: boolean) {
+        this._validTypeStageLibelle = value;
+    }
+
+    get stageEtudiantsElement(): StageEtudiantDto {
+        if( this._stageEtudiantsElement == null )
+            this._stageEtudiantsElement = new StageEtudiantDto();
+        return this._stageEtudiantsElement;
+    }
+
+    set stageEtudiantsElement(value: StageEtudiantDto) {
+        this._stageEtudiantsElement = value;
+    }
+    get stageEncadrantInternesElement(): StageEncadrantInterneDto {
+        if( this._stageEncadrantInternesElement == null )
+            this._stageEncadrantInternesElement = new StageEncadrantInterneDto();
+        return this._stageEncadrantInternesElement;
+    }
+
+    set stageEncadrantInternesElement(value: StageEncadrantInterneDto) {
+        this._stageEncadrantInternesElement = value;
+    }
+    get stageEncadrantExternesElement(): StageEncadrantExterneDto {
+        if( this._stageEncadrantExternesElement == null )
+            this._stageEncadrantExternesElement = new StageEncadrantExterneDto();
+        return this._stageEncadrantExternesElement;
+    }
+
+    set stageEncadrantExternesElement(value: StageEncadrantExterneDto) {
+        this._stageEncadrantExternesElement = value;
+    }
+    get stageAttachementsElement(): StageAttachementDto {
+        if( this._stageAttachementsElement == null )
+            this._stageAttachementsElement = new StageAttachementDto();
+        return this._stageAttachementsElement;
+    }
+
+    set stageAttachementsElement(value: StageAttachementDto) {
+        this._stageAttachementsElement = value;
+    }
+
+    get items(): Array<StageDto> {
+        return this.service.items;
+    }
+
+    set items(value: Array<StageDto>) {
+        this.service.items = value;
+    }
+
+    get item(): StageDto {
+        return this.service.item;
+    }
+
+    set item(value: StageDto) {
+        this.service.item = value;
+    }
+
+    get createDialog(): boolean {
+        return this.service.createDialog;
+    }
+
+    set createDialog(value: boolean) {
+        this.service.createDialog = value;
+    }
+
+    get criteria(): StageCriteria {
+        return this.service.criteria;
+    }
+
+    set criteria(value: StageCriteria) {
+        this.service.criteria = value;
+    }
+
+    get dateFormat() {
+        return environment.dateFormatCreate;
+    }
+
+    get dateFormatColumn() {
+        return environment.dateFormatCreate;
+    }
+
+    get submitted(): boolean {
+        return this._submitted;
+    }
+
+    set submitted(value: boolean) {
+        this._submitted = value;
+    }
+
+    get errorMessages(): string[] {
+        if (this._errorMessages == null) {
+            this._errorMessages = new Array<string>();
+        }
+        return this._errorMessages;
+    }
+
+    set errorMessages(value: string[]) {
+        this._errorMessages = value;
+    }
+
+    get validate(): boolean {
+        return this.service.validate;
+    }
+
+    set validate(value: boolean) {
+        this.service.validate = value;
+    }
+
+
+    get activeTab(): number {
+        return this._activeTab;
+    }
+
+    set activeTab(value: number) {
+        this._activeTab = value;
+    }
+
+
+}

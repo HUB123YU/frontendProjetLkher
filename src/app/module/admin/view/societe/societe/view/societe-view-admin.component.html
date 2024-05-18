@@ -1,0 +1,68 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'societe.tabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'societe.tabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'societe.ice' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.ice' | translate}}" autofocus  id="1" [ngModel]="item.ice">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'societe.nom' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.nom' | translate}}" autofocus  id="2" [ngModel]="item.nom">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'societe.adresse' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.adresse' | translate}}" autofocus  id="3" [ngModel]="item.adresse">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'societe.fax' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.fax' | translate}}" autofocus  id="4" [ngModel]="item.fax">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'societe.domaine' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.domaine' | translate}}" autofocus  id="5" [ngModel]="item.domaine">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'societe.ville' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.ville' | translate}}" autofocus  id="6" [ngModel]="item.ville?.libelle">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'societe.secteurActivite' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.secteurActivite' | translate}}" autofocus  id="7" [ngModel]="item.secteurActivite?.libelle">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="8">{{'societe.email' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.email' | translate}}" autofocus  id="8" [ngModel]="item.email">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="9">{{'societe.telephone' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.telephone' | translate}}" autofocus  id="9" [ngModel]="item.telephone">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="10">{{'societe.codePostal' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.codePostal' | translate}}" autofocus  id="10" [ngModel]="item.codePostal">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="11">{{'societe.pays' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'societe.pays' | translate}}" autofocus  id="11" [ngModel]="item.pays?.libelle">
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-flexbox">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

@@ -1,0 +1,475 @@
+{
+    "from-to": "Elements from {first} to {last} (total {totalRecords})",
+    "new" : "New",
+    "search": "Search",
+    "export": "Export",
+    "validate": "Validate",
+    "search": "Seach...",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "next": "Next",
+    "yes": "Yes",
+    "no": "No",
+    "actions": "Actions",
+    "confirm": "Confirm",
+    "creation": "Creation",
+    "list": "List",
+	"actionPermission":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "actionPermission": "Action permission",
+        "tabPan": "Action permission",
+        "header": "Liste des action permissions",
+        "deleteActionPermissionConfirmationMessage": "Are you sure you want to delete action permission",
+        "deleteActionPermissionsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "modelPermissionUser":{
+        "actionPermission": "Action permission",
+        "actionPermissionPlaceHolder": "Select a Action permission",
+        "actionPermissionPlaceHolderFilter": "Search by Action permission",
+        "modelPermission": "Model permission",
+        "modelPermissionPlaceHolder": "Select a Model permission",
+        "modelPermissionPlaceHolderFilter": "Search by Model permission",
+        "value": "Value",
+        "user": "User",
+        "userPlaceHolder": "Select a User",
+        "userPlaceHolderFilter": "Search by User",
+        "subAttribute": "Sub attribute",
+        "modelPermissionUser": "Model permission user",
+        "tabPan": "Model permission user",
+        "header": "Liste des model permission users",
+        "deleteModelPermissionUserConfirmationMessage": "Are you sure you want to delete model permission user",
+        "deleteModelPermissionUsersConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+    "role":{
+        "authority": "Authority",
+        "role": "Role",
+        "tabPan": "Role",
+        "header": "Liste des roles",
+        "deleteRoleConfirmationMessage": "Are you sure you want to delete role",
+        "deleteRolesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+
+    "roleUser":{
+        "role": "Role",
+        "rolePlaceHolder": "Select a Role",
+        "rolePlaceHolderFilter": "Search by Role",
+        "user": "User",
+        "userPlaceHolder": "Select a User",
+        "userPlaceHolderFilter": "Search by User",
+        "roleUser": "Role user",
+        "tabPan": "Role user",
+        "header": "Liste des role users",
+        "deleteRoleUserConfirmationMessage": "Are you sure you want to delete role user",
+        "deleteRoleUsersConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "user":{
+        "credentialsNonExpired": "Credentials non expired",
+        "enabled": "Enabled",
+        "email": "Email",
+        "accountNonExpired": "Account non expired",
+        "accountNonLocked": "Account non locked",
+        "username": "Username",
+        "password": "Password",
+        "passwordChanged": "Password changed",
+        "modelPermissionUsers": "Model permission users",
+        "roleUsers": "Role users",
+        "RoleUsersPlaceHolder": "Select multiple Roles",
+        "user": "User",
+        "tabPan": "User",
+        "header": "Liste des users",
+        "deleteUserConfirmationMessage": "Are you sure you want to delete user",
+        "deleteUsersConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "modelPermission":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "modelPermission": "Model permission",
+        "tabPan": "Model permission",
+        "header": "Liste des model permissions",
+        "deleteModelPermissionConfirmationMessage": "Are you sure you want to delete model permission",
+        "deleteModelPermissionsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+
+    "departement":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "departement": "Departement",
+        "tabPan": "Departement",
+        "header": "Liste des departements",
+        "deleteDepartementConfirmationMessage": "Are you sure you want to delete departement",
+        "deleteDepartementsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "domaine":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "domaine": "Domaine",
+        "tabPan": "Domaine",
+        "header": "Liste des domaines",
+        "deleteDomaineConfirmationMessage": "Are you sure you want to delete domaine",
+        "deleteDomainesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "filiere":{
+        "code": "Code",
+        "libelle": "Libelle",
+        "departement": "Departement",
+        "departementPlaceHolder": "Select a Departement",
+        "departementPlaceHolderFilter": "Search by Departement",
+        "filiere": "Filiere",
+        "tabPan": "Filiere",
+        "header": "Liste des filieres",
+        "deleteFiliereConfirmationMessage": "Are you sure you want to delete filiere",
+        "deleteFilieresConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "juryEncadrantInterne":{
+        "encadrantInterne": "Encadrant interne",
+        "encadrantInternePlaceHolder": "Select a Encadrant interne",
+        "encadrantInternePlaceHolderFilter": "Search by Encadrant interne",
+        "jury": "Jury",
+        "juryPlaceHolder": "Select a Jury",
+        "juryPlaceHolderFilter": "Search by Jury",
+        "juryEncadrantInterne": "Jury encadrant interne",
+        "tabPan": "Jury encadrant interne",
+        "header": "Liste des jury encadrant internes",
+        "deleteJuryEncadrantInterneConfirmationMessage": "Are you sure you want to delete jury encadrant interne",
+        "deleteJuryEncadrantInternesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "attachement":{
+        "nom": "Nom",
+        "contenu": "Contenu",
+        "taille": "Taille",
+        "tailleMin": "Taille Min",
+        "tailleMax": "Taille Max",
+        "typeAttachement": "Type attachement",
+        "typeAttachementPlaceHolder": "Select a Type attachement",
+        "typeAttachementPlaceHolderFilter": "Search by Type attachement",
+        "stage": "Stage",
+        "stagePlaceHolder": "Select a Stage",
+        "stagePlaceHolderFilter": "Search by Stage",
+        "attachement": "Attachement",
+        "tabPan": "Attachement",
+        "header": "Liste des attachements",
+        "deleteAttachementConfirmationMessage": "Are you sure you want to delete attachement",
+        "deleteAttachementsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "pays":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "pays": "Pays",
+        "tabPan": "Pays",
+        "header": "Liste des pays",
+        "deletePaysConfirmationMessage": "Are you sure you want to delete pays",
+        "deletePayssConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "stageEncadrantInterne":{
+        "stage": "Stage",
+        "stagePlaceHolder": "Select a Stage",
+        "stagePlaceHolderFilter": "Search by Stage",
+        "encadrantInterne": "Encadrant interne",
+        "encadrantInternePlaceHolder": "Select a Encadrant interne",
+        "encadrantInternePlaceHolderFilter": "Search by Encadrant interne",
+        "stageEncadrantInterne": "Stage encadrant interne",
+        "tabPan": "Stage encadrant interne",
+        "header": "Liste des stage encadrant internes",
+        "deleteStageEncadrantInterneConfirmationMessage": "Are you sure you want to delete stage encadrant interne",
+        "deleteStageEncadrantInternesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "genre":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "genre": "Genre",
+        "tabPan": "Genre",
+        "header": "Liste des genres",
+        "deleteGenreConfirmationMessage": "Are you sure you want to delete genre",
+        "deleteGenresConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "encadrantExterne":{
+        "code": "Code",
+        "nom": "Nom",
+        "prenom": "Prenom",
+        "email": "Email",
+        "telephone": "Telephone",
+        "biographie": "Biographie",
+        "societe": "Societe",
+        "societePlaceHolder": "Select a Societe",
+        "societePlaceHolderFilter": "Search by Societe",
+        "encadrantExterne": "Encadrant externe",
+        "tabPan": "Encadrant externe",
+        "header": "Liste des encadrant externes",
+        "deleteEncadrantExterneConfirmationMessage": "Are you sure you want to delete encadrant externe",
+        "deleteEncadrantExternesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "nationalite":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "nationalite": "Nationalite",
+        "tabPan": "Nationalite",
+        "header": "Liste des nationalites",
+        "deleteNationaliteConfirmationMessage": "Are you sure you want to delete nationalite",
+        "deleteNationalitesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "stageAttachement":{
+        "stage": "Stage",
+        "stagePlaceHolder": "Select a Stage",
+        "stagePlaceHolderFilter": "Search by Stage",
+        "attachement": "Attachement",
+        "attachementPlaceHolder": "Select a Attachement",
+        "attachementPlaceHolderFilter": "Search by Attachement",
+        "size": "Size",
+        "sizeMin": "Size Min",
+        "sizeMax": "Size Max",
+        "stageAttachement": "Stage attachement",
+        "tabPan": "Stage attachement",
+        "header": "Liste des stage attachements",
+        "deleteStageAttachementConfirmationMessage": "Are you sure you want to delete stage attachement",
+        "deleteStageAttachementsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "jury":{
+        "ref": "Ref",
+        "nombreMembres": "Nombre membres",
+        "nombreMembresMin": "Nombre membres Min",
+        "nombreMembresMax": "Nombre membres Max",
+        "juryEncadrantInternes": "Jury encadrant internes",
+        "JuryEncadrantInternesPlaceHolder": "Select multiple Encadrant internes",
+        "jury": "Jury",
+        "tabPan": "Jury",
+        "header": "Liste des jurys",
+        "deleteJuryConfirmationMessage": "Are you sure you want to delete jury",
+        "deleteJurysConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "secteurActivite":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "secteurActivite": "Secteur activite",
+        "tabPan": "Secteur activite",
+        "header": "Liste des secteur activites",
+        "deleteSecteurActiviteConfirmationMessage": "Are you sure you want to delete secteur activite",
+        "deleteSecteurActivitesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "ville":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "ville": "Ville",
+        "tabPan": "Ville",
+        "header": "Liste des villes",
+        "deleteVilleConfirmationMessage": "Are you sure you want to delete ville",
+        "deleteVillesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "stageEtudiant":{
+        "stage": "Stage",
+        "stagePlaceHolder": "Select a Stage",
+        "stagePlaceHolderFilter": "Search by Stage",
+        "etudiant": "Etudiant",
+        "etudiantPlaceHolder": "Select a Etudiant",
+        "etudiantPlaceHolderFilter": "Search by Etudiant",
+        "stageEtudiant": "Stage etudiant",
+        "tabPan": "Stage etudiant",
+        "header": "Liste des stage etudiants",
+        "deleteStageEtudiantConfirmationMessage": "Are you sure you want to delete stage etudiant",
+        "deleteStageEtudiantsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "etudiant":{
+        "adresse": "Adresse",
+        "telephone": "Telephone",
+        "dateNaissance": "Date naissance",
+        "dateNaissanceMin": "Date naissance Min",
+        "dateNaissanceMax": "Date naissance Max",
+        "genre": "Genre",
+        "genrePlaceHolder": "Select a Genre",
+        "genrePlaceHolderFilter": "Search by Genre",
+        "nationalite": "Nationalite",
+        "nationalitePlaceHolder": "Select a Nationalite",
+        "nationalitePlaceHolderFilter": "Search by Nationalite",
+        "codeAppoge": "Code appoge",
+        "filiere": "Filiere",
+        "filierePlaceHolder": "Select a Filiere",
+        "filierePlaceHolderFilter": "Search by Filiere",
+        "credentialsNonExpired": "Credentials non expired",
+        "enabled": "Enabled",
+        "accountNonExpired": "Account non expired",
+        "accountNonLocked": "Account non locked",
+        "passwordChanged": "Password changed",
+        "username": "Username",
+        "password": "Password",
+        "etudiant": "Etudiant",
+        "tabPan": "Etudiant",
+        "header": "Liste des etudiants",
+        "deleteEtudiantConfirmationMessage": "Are you sure you want to delete etudiant",
+        "deleteEtudiantsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "typeStage":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "typeStage": "Type stage",
+        "tabPan": "Type stage",
+        "header": "Liste des type stages",
+        "deleteTypeStageConfirmationMessage": "Are you sure you want to delete type stage",
+        "deleteTypeStagesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "stage":{
+        "sujet": "Sujet",
+        "description": "Description",
+        "dateDebut": "Date debut",
+        "dateDebutMin": "Date debut Min",
+        "dateDebutMax": "Date debut Max",
+        "dateFin": "Date fin",
+        "dateFinMin": "Date fin Min",
+        "dateFinMax": "Date fin Max",
+        "domaine": "Domaine",
+        "domainePlaceHolder": "Select a Domaine",
+        "domainePlaceHolderFilter": "Search by Domaine",
+        "lieu": "Lieu",
+        "dureeSemaines": "Duree semaines",
+        "dureeSemainesMin": "Duree semaines Min",
+        "dureeSemainesMax": "Duree semaines Max",
+        "societe": "Societe",
+        "societePlaceHolder": "Select a Societe",
+        "societePlaceHolderFilter": "Search by Societe",
+        "stageEtudiants": "Stage etudiants",
+        "StageEtudiantsPlaceHolder": "Select multiple Etudiants",
+        "stageEncadrantInternes": "Stage encadrant internes",
+        "StageEncadrantInternesPlaceHolder": "Select multiple Encadrant internes",
+        "stageEncadrantExternes": "Stage encadrant externes",
+        "StageEncadrantExternesPlaceHolder": "Select multiple Encadrant externes",
+        "jury": "Jury",
+        "juryPlaceHolder": "Select a Jury",
+        "juryPlaceHolderFilter": "Search by Jury",
+        "filiere": "Filiere",
+        "filierePlaceHolder": "Select a Filiere",
+        "filierePlaceHolderFilter": "Search by Filiere",
+        "note": "Note",
+        "noteMin": "Note Min",
+        "noteMax": "Note Max",
+        "dateSoutenance": "Date soutenance",
+        "dateSoutenanceMin": "Date soutenance Min",
+        "dateSoutenanceMax": "Date soutenance Max",
+        "typeStage": "Type stage",
+        "typeStagePlaceHolder": "Select a Type stage",
+        "typeStagePlaceHolderFilter": "Search by Type stage",
+        "stageAttachements": "Stage attachements",
+        "stage": "Stage",
+        "tabPan": "Stage",
+        "header": "Liste des stages",
+        "deleteStageConfirmationMessage": "Are you sure you want to delete stage",
+        "deleteStagesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "typeAttachement":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "typeAttachement": "Type attachement",
+        "tabPan": "Type attachement",
+        "header": "Liste des type attachements",
+        "deleteTypeAttachementConfirmationMessage": "Are you sure you want to delete type attachement",
+        "deleteTypeAttachementsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "societe":{
+        "ice": "Ice",
+        "nom": "Nom",
+        "adresse": "Adresse",
+        "fax": "Fax",
+        "domaine": "Domaine",
+        "ville": "Ville",
+        "villePlaceHolder": "Select a Ville",
+        "villePlaceHolderFilter": "Search by Ville",
+        "secteurActivite": "Secteur activite",
+        "secteurActivitePlaceHolder": "Select a Secteur activite",
+        "secteurActivitePlaceHolderFilter": "Search by Secteur activite",
+        "email": "Email",
+        "telephone": "Telephone",
+        "codePostal": "Code postal",
+        "pays": "Pays",
+        "paysPlaceHolder": "Select a Pays",
+        "paysPlaceHolderFilter": "Search by Pays",
+        "societe": "Societe",
+        "tabPan": "Societe",
+        "header": "Liste des societes",
+        "deleteSocieteConfirmationMessage": "Are you sure you want to delete societe",
+        "deleteSocietesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "stageEncadrantExterne":{
+        "stage": "Stage",
+        "stagePlaceHolder": "Select a Stage",
+        "stagePlaceHolderFilter": "Search by Stage",
+        "encadrantExterne": "Encadrant externe",
+        "encadrantExternePlaceHolder": "Select a Encadrant externe",
+        "encadrantExternePlaceHolderFilter": "Search by Encadrant externe",
+        "stageEncadrantExterne": "Stage encadrant externe",
+        "tabPan": "Stage encadrant externe",
+        "header": "Liste des stage encadrant externes",
+        "deleteStageEncadrantExterneConfirmationMessage": "Are you sure you want to delete stage encadrant externe",
+        "deleteStageEncadrantExternesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "encadrantInterne":{
+        "code": "Code",
+        "biographie": "Biographie",
+        "credentialsNonExpired": "Credentials non expired",
+        "enabled": "Enabled",
+        "accountNonExpired": "Account non expired",
+        "accountNonLocked": "Account non locked",
+        "passwordChanged": "Password changed",
+        "username": "Username",
+        "password": "Password",
+        "encadrantInterne": "Encadrant interne",
+        "tabPan": "Encadrant interne",
+        "header": "Liste des encadrant internes",
+        "deleteEncadrantInterneConfirmationMessage": "Are you sure you want to delete encadrant interne",
+        "deleteEncadrantInternesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+"appName": "GED"
+}
+
+
